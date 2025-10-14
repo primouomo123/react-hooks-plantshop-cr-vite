@@ -16,6 +16,7 @@ function PlantPage() {
     fetch("http://localhost:6001/plants")
       .then((r) => {
         if (r.ok) {
+          setError(null);
           return r.json();
         } else {
           throw new Error("Fetch request failed");
@@ -38,10 +39,14 @@ function PlantPage() {
     plant.name.toLowerCase().includes(search.toLowerCase())
   );
 
+  const handleNewPlant = (newPlant) => {
+    setPlants(prev => [...prev, newPlant]);
+  }
+
   return (
     <main>
-      <NewPlantForm />
-      <Search onSearch={setSearch} />
+      <NewPlantForm onNewPlant={handleNewPlant} />
+      <Search onSearch={setSearch} fetchAgain={fetchPlants} />
       <PlantList plants={filteredPlants} loading={loading} error={error} />
     </main>
   );
