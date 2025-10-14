@@ -52,7 +52,7 @@ function NewPlantForm({ onNewPlant }) {
         <input type="text" name="image" placeholder="Image URL" value={image}
         onChange={e => setImage(e.target.value)} />
         <input type="number" name="price" step="0.01" placeholder="Price" value={price}
-        onChange={e => setPrice(e.target.value === "" ? "" : parseFloat(e.target.value))} />
+        onChange={e => setPrice(e.target.value === "" ? "" : e.target.value)} />
         <button type="submit">Add Plant</button>
       </form>
     </div>
