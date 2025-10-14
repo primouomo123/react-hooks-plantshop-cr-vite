@@ -7,6 +7,7 @@ function PlantPage() {
   const [plants, setPlants] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [search, setSearch] = useState(""); // string for search input
 
   const fetchPlants = () => {
     setLoading(true);
@@ -32,11 +33,16 @@ function PlantPage() {
     fetchPlants();
   }, []);
 
+  // Filter plants based on search term
+  const filteredPlants = plants.filter((plant) =>
+    plant.name.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <main>
       <NewPlantForm />
-      <Search />
-      <PlantList plants={plants} loading={loading} error={error} />
+      <Search onSearch={setSearch} />
+      <PlantList plants={filteredPlants} loading={loading} error={error} />
     </main>
   );
 }
